@@ -43,7 +43,7 @@ jobs:
 
         git add ./charts
 
-        git commit --author="GH Actions <>" -m "Package and index charts"
+        git commit --author="GH Actions <sov@equinor.com>" -m "Package and index charts"
 
         git push
 
