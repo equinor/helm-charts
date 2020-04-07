@@ -32,6 +32,7 @@ jobs:
         curl -L https://github.com/helm/chart-testing/releases/download/v3.0.0-rc.1/chart-testing_3.0.0-rc.1_linux_amd64.tar.gz | sudo tar xz
     - name: Lint chart
       run: |
+        ls /etc
         /ct lint --chart-dirs charts/ --all --debug --remote origin --target-branch master
     - name: Package charts and create new index
       run: |
