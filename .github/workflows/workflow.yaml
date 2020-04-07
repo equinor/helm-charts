@@ -39,3 +39,13 @@ jobs:
 
         helm repo index ./charts
 
+        git status
+
+        git add ./charts
+
+        git commit -m "Package and index charts"
+
+        git push
+
+        
+
