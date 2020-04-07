@@ -2,6 +2,13 @@
 
 Repository of helm-charts published on [hub.helm.sh](https://hub.helm.sh/charts/equinor)
 
+## Use charts from this repository directly
+
+    helm repo add equinor-charts https://equinor.github.io/helm-charts/charts/
+    helm repo update
+
+    helm upgrade --install neo4j-community equinor-charts/neo4j-community
+
 ## Adding a chart to this repo
 
 To add a chart to this repo, please follow the same rules as hub.helm.sh as [documented here](https://github.com/helm/hub/blob/master/Repositories.md).
