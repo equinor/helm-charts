@@ -1,0 +1,14 @@
+name: Fetch and lint
+
+on: [push, pull_request]
+
+jobs:
+  fetch:
+    name: Fetch
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: quay.io/helmpack/chart-testing
+      name: Lint
+      run: |
+        ls /
