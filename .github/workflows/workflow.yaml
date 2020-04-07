@@ -23,7 +23,7 @@ jobs:
 
         sudo pip3 install setuptools
 
-        sudo pip3 install --user yamllint yamale
+        sudo pip3 install yamllint yamale
 
         curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash
 
