@@ -39,11 +39,14 @@ jobs:
 
         helm repo index ./charts
 
+        git config --global user.email "sov@equinor.com"
+        git config --global user.name "GH Actions"
+
         git status
 
         git add ./charts
 
-        git commit --author="GH Actions <sov@equinor.com>" -m "Package and index charts"
+        git commit -m "Package and index charts"
 
         git push
 
