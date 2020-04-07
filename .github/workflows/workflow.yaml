@@ -15,17 +15,19 @@ jobs:
       run: |
         echo $GITHUB_WORKSPACE
 
-        sudo apt-get update && apt-get install -y curl git python3-pip
+        sudo apt-get update
+        
+        sudo apt-get install -y curl git python3-pip
 
         sudo pip3 install --user yamllint yamale
 
-        sudo curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+        curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | sudo bash
 
         sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 
         cd /
 
-        sudo curl -L https://github.com/helm/chart-testing/releases/download/v3.0.0-rc.1/chart-testing_3.0.0-rc.1_linux_amd64.tar.gz | tar xz
+        curl -L https://github.com/helm/chart-testing/releases/download/v3.0.0-rc.1/chart-testing_3.0.0-rc.1_linux_amd64.tar.gz | sudo tar xz
     - name: Lint chart
       run: |
         /ct lint --chart-dirs charts/ --all --debug --remote origin --target-branch master
