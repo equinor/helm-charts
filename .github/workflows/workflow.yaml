@@ -15,21 +15,23 @@ jobs:
       run: |
         echo $GITHUB_WORKSPACE
 
-        apt-get update && apt-get install -y curl git python3-pip
+        sudo apt-get update && apt-get install -y curl git python3-pip
 
-        pip3 install --user yamllint yamale
+        sudo pip3 install --user yamllint yamale
 
-        curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+        sudo curl -fsSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-        curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+        sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 
-        curl -L https://github.com/helm/chart-testing/releases/download/v3.0.0-rc.1/chart-testing_3.0.0-rc.1_linux_amd64.tar.gz | tar xz
+        cd /
+
+        sudo curl -L https://github.com/helm/chart-testing/releases/download/v3.0.0-rc.1/chart-testing_3.0.0-rc.1_linux_amd64.tar.gz | tar xz
     - name: Lint chart
       run: |
-        ct lint --chart-dirs charts/ --all --debug --remote origin --target-branch master
+        /ct lint --chart-dirs charts/ --all --debug --remote origin --target-branch master
     - name: Package charts and create new index
       run: |
-        ls -d charts/*/ | xargs helm package --destination ./charts
+        ls -d ./charts/*/ | xargs helm package --destination ./charts
 
         helm repo index ./charts
 
