@@ -1,0 +1,97 @@
+# Default values for Neo4j.
+# This is a YAML-formatted file.
+# Declare name/value pairs to be passed into your templates.
+# name: value
+
+name: "neo4j"
+
+service:
+  type: ClusterIP
+
+# Specs for the Neo4j docker image
+image: "neo4j"
+imageTag: "3.5.17"
+imagePullPolicy: "IfNotPresent"
+# imagePullSecret: registry-secret
+
+## Node labels for pod assignment
+## ref: https://kubernetes.io/docs/user-guide/node-selection/
+nodeSelector: {}
+
+## Tolerations for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+tolerations: []
+
+## Affinity for pod assignment
+## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+affinity: {}
+
+# Use password authentication
+authEnabled: true
+
+## Specify password for neo4j user
+## Defaults to a random 10-character alphanumeric string if not set and authEnabled is true
+# neo4jPassword:
+
+persistentVolume:
+  ## whether or not persistence is enabled
+  ##
+  enabled: true
+
+  ## server data Persistent Volume mount root path
+  ##
+  mountPath: /data
+
+  ## server data Persistent Volume size
+  ##
+  size: 10Gi
+
+  ## server data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ## storageClass: "-"
+
+  ## Subdirectory of server data Persistent Volume to mount
+  ## Useful if the volume's root directory is not empty
+  ##
+  ## subPath: ""
+
+## Pass extra environment variables to the Neo4j container.
+##
+extraVars:
+# - name: EXTRA_VAR_1
+#  value: extra-var-value-1
+# - name: EXTRA_VAR_2
+#   value: extra-var-value-2
+
+sidecarContainers: []
+## Additional containers to be added to the Neo4j pod.
+#  - name: my-sidecar
+#    image: nginx:latest
+
+initContainers: []
+## init containers to run before the Neo4j pod e.g. to install plugins
+
+# - name: init-plugins
+#   image: "appropriate/curl:latest"
+#   imagePullPolicy: "IfNotPresent"
+#   volumeMounts:
+#   - name: plugins
+#     mountPath: /plugins
+#   command:
+#     - "/bin/sh"
+#     - "-c"
+#     - |
+#       curl -L https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/3.2.0.3/apoc-3.2.0.3-all.jar -O
+#       cp apoc-3.2.0.3-all.jar /plugins/
+
+resources: {}
+# limits:
+#   cpu: 100m
+#   memory: 512Mi
+# requests:
+#   cpu: 100m
+#   memory: 512Mi
