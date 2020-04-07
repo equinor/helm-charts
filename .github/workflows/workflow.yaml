@@ -3,8 +3,8 @@ name: Fetch and lint
 on: [push, pull_request]
 
 jobs:
-  fetch:
-    name: Fetch
+  fetch-lint-and-push:
+    name: Fetch, lint and push helm charts
     runs-on: ubuntu-latest
     env:
       GITHUB_WORKSPACE: /charts
@@ -43,9 +43,9 @@ jobs:
 
         git add ./charts
 
-        git commit -m "Package and index charts"
+        git commit --author="GH Actions <>" -m "Package and index charts"
 
         git push
 
-        
+
 
