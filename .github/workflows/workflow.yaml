@@ -13,6 +13,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Download chart-testing and dependencies
       run: |
+        pwd
+
         echo $GITHUB_WORKSPACE
 
         sudo apt-get update
@@ -27,13 +29,10 @@ jobs:
 
         sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 
-        cd /
-
         curl -L https://github.com/helm/chart-testing/releases/download/v3.0.0-rc.1/chart-testing_3.0.0-rc.1_linux_amd64.tar.gz | sudo tar xz
     - name: Lint chart
       run: |
-        ls /etc
-        /ct lint --chart-dirs charts/ --all --debug --remote origin --target-branch master
+        ./ct lint --chart-dirs charts/ --all --debug --remote origin --target-branch master --lint-conf ./etc/lintconf.yaml --chart-yaml-schema ./etc/chart_schema.yaml
     - name: Package charts and create new index
       run: |
         ls -d ./charts/*/ | xargs helm package --destination ./charts
