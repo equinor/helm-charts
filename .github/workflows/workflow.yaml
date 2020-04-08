@@ -1,6 +1,10 @@
 name: Fetch and lint
 
-on: [push, pull_request]
+on:
+  pull_request: 
+  push:
+    paths:
+    - 'charts/**'
 
 jobs:
   fetch-lint-and-push:
@@ -34,6 +38,7 @@ jobs:
       run: |
         ./ct lint --chart-dirs charts/ --all --debug --remote origin --target-branch master --lint-conf ./etc/lintconf.yaml --chart-yaml-schema ./etc/chart_schema.yaml
     - name: Package charts and create new index
+      if: github.event_name == 'push'
       run: |
         ls -d ./charts/*/ | xargs helm package --destination ./charts
 
