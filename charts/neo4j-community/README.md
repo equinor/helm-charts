@@ -97,3 +97,25 @@ helm upgrade --install neo4j-community -f values.yaml equinor-charts/neo4j-commu
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
+
+## Special considerations when using AzureFile storage
+
+If you want to use AzureFile you need to create a StorageClass with the neo4j user uid&gid in mount options:
+
+```
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: azurefile-neo4j
+provisioner: kubernetes.io/azure-file
+reclaimPolicy: Retain
+mountOptions:
+  - dir_mode=0755
+  - file_mode=0755
+  - uid=101 # Allow write access for neo4j
+  - gid=101 # Allow write access for neo4j
+parameters:
+  skuName: Standard_LRS
+```
+
+And use `--set persistentVolume.storageClass=azurefile-neo4j` when installing the chart.
