@@ -75,6 +75,9 @@ spec:
         {{- end }}
         - name: plugins
           emptyDir: {}
+{{- if .Values.serviceAccountName }}
+      serviceAccountName: {{ .Values.serviceAccountName }}
+{{- end }}
 {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
