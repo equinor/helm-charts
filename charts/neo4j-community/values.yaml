@@ -14,6 +14,8 @@ imageTag: "3.5.17"
 imagePullPolicy: "IfNotPresent"
 # imagePullSecret: registry-secret
 
+# serviceAccountName: default
+
 ## Node labels for pod assignment
 ## ref: https://kubernetes.io/docs/user-guide/node-selection/
 nodeSelector: {}
