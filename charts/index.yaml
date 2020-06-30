@@ -3,7 +3,26 @@ entries:
   neo4j-community:
   - apiVersion: v1
     appVersion: 3.5.17
-    created: "2020-05-28T17:34:16.074544825Z"
+    created: "2020-06-30T11:13:16.954915535Z"
+    description: Neo4j is the world's leading graph database
+    digest: a9c333d15e9742f93b77dc1616687f602a47e11d6e23fae426180a88802b7ba1
+    home: https://www.neo4j.com
+    icon: http://info.neo4j.com/rs/773-GON-065/images/neo4j_logo.png
+    maintainers:
+    - email: sovrevage@gmail.com
+      name: StianOvrevage
+    name: neo4j-community
+    sources:
+    - https://github.com/neo4j/neo4j
+    - https://github.com/neo4j/docker-neo4j
+    - https://github.com/mneedham/k8s-kubectl
+    - https://github.com/equinor/helm-charts/tree/master/charts/neo4j-community
+    urls:
+    - neo4j-community-1.1.1.tgz
+    version: 1.1.1
+  - apiVersion: v1
+    appVersion: 3.5.17
+    created: "2020-06-30T11:13:16.954330634Z"
     description: Neo4j is the world's leading graph database
     digest: 48de606dbb5c3f08b84570144b795f16d6365422b5e1cfcb8b5eb150e8a87b7d
     home: https://www.neo4j.com
@@ -22,7 +41,7 @@ entries:
     version: 1.1.0
   - apiVersion: v1
     appVersion: 3.5.17
-    created: "2020-05-28T17:34:16.041250913Z"
+    created: "2020-06-30T11:13:16.953811734Z"
     description: Neo4j is the world's leading graph database
     digest: 5b7b8e7ffcacfec129b30c14fcf101bb7ffc5e916d87da5ad00b67ea5dc784dd
     home: https://www.neo4j.com
@@ -41,7 +60,7 @@ entries:
     version: 1.0.3
   - apiVersion: v1
     appVersion: 3.5.17
-    created: "2020-05-28T17:34:16.040688321Z"
+    created: "2020-06-30T11:13:16.953167833Z"
     description: Neo4j is the world's leading graph database
     digest: 1f9a6f47cdf98cbe54081f581bd607acab2549ea6531e9c17f46fbedce8f2547
     home: https://www.neo4j.com
@@ -58,4 +77,4 @@ entries:
     urls:
     - neo4j-community-1.0.2.tgz
     version: 1.0.2
-generated: "2020-05-28T17:34:16.039792334Z"
+generated: "2020-06-30T11:13:16.932859714Z"
