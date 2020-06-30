@@ -37,7 +37,7 @@ authEnabled: true
 
 # Or use an existing secret for password. If enabled takes precedence over `neo4jPassword` above
 useExistingNeo4jPassword:
- enabled: false
+  enabled: false
 #  secretName: my-k8s-secret
 #  secretKey: neo4j-password
 
