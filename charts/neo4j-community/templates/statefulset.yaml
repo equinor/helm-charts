@@ -25,11 +25,19 @@ spec:
           - name: AUTH_ENABLED
             value: "{{ .Values.authEnabled }}"
           {{- if .Values.authEnabled }}
+          {{- if .Values.useExistingNeo4jPassword.enabled }}
+          - name: NEO4J_SECRETS_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.useExistingNeo4jPassword.secretName }}
+                key: {{ .Values.useExistingNeo4jPassword.secretKey }}
+          {{ else }}
           - name: NEO4J_SECRETS_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: {{ template "neo4j.secrets.fullname" . }}
                 key: neo4j-password
+          {{- end }}
           {{- end }}
 {{- if .Values.extraVars }}
 {{ toYaml .Values.extraVars | indent 10 }}

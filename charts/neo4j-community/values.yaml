@@ -35,6 +35,12 @@ authEnabled: true
 ## Defaults to a random 10-character alphanumeric string if not set and authEnabled is true
 # neo4jPassword:
 
+# Or use an existing secret for password. If enabled takes precedence over `neo4jPassword` above
+# useExistingNeo4jPassword:
+#  enabled: false
+#  secretName: my-k8s-secret
+#  secretKey: neo4j-password
+
 persistentVolume:
   ## whether or not persistence is enabled
   ##
