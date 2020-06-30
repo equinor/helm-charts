@@ -9,7 +9,7 @@ sources:
   - https://github.com/neo4j/neo4j
   - https://github.com/neo4j/docker-neo4j
   - https://github.com/mneedham/k8s-kubectl
-  - https://github.com/equinor/helm-charts/charts/neo4j-community
+  - https://github.com/equinor/helm-charts/tree/master/charts/neo4j-community
 maintainers:
   - name: StianOvrevage
     email: sovrevage@gmail.com
