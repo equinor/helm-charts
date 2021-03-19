@@ -160,7 +160,7 @@ env:
 
 exporters:
   jmx:
-    enabled: true
+    enabled: false
     image:
       repository: bitnami/jmx-exporter
       tag: 0.15.0
