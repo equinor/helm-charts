@@ -5,16 +5,32 @@
 
 name: "neo4j"
 
+## This service is intended for clients running in kubernetes to connect to
+## the cluster.
+## Default: ClusterIP (headless)
 service:
   type: ClusterIP
+  annotations: {}
+  labels: {}
+  loadBalancerSourceRanges: []
 
 # Specs for the Neo4j docker image
 image: "neo4j"
-imageTag: "3.5.17"
+## Image tag
+## Overrides .Chart.AppVersion
+# imageTag: ""
 imagePullPolicy: "IfNotPresent"
 # imagePullSecret: registry-secret
 
-# serviceAccountName: default
+# Create Role and RoleBinding
+rbac:
+  create: false
+
+serviceAccount:
+  create: true
+  annotations: {}
+  # If empty, name will be generated from the chart's fullname
+  name:
 
 ## Node labels for pod assignment
 ## ref: https://kubernetes.io/docs/user-guide/node-selection/
@@ -27,6 +43,12 @@ tolerations: []
 ## Affinity for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
 affinity: {}
+
+## Labels to be added to pods
+podLabels: {}
+
+## Annotations to be added to pods
+podAnnotations: {}
 
 # Use password authentication
 authEnabled: true
@@ -67,6 +89,14 @@ persistentVolume:
   ##
   ## subPath: ""
 
+## specify additional volumes to mount in the Neo4j container, this can be used
+## to specify additional storage of material or to inject files from ConfigMaps
+## into the running container
+additionalVolumes: []
+## specify where the additional volumes are mounted in the Neo4j container
+additionalVolumeMounts: []
+terminationGracePeriodSeconds: 300
+
 ## Pass extra environment variables to the Neo4j container.
 ##
 extraVars:
@@ -103,3 +133,27 @@ resources: {}
 # requests:
 #   cpu: 100m
 #   memory: 512Mi
+
+# Readiness probes will send a kill signal to the container if
+# it fails enough times
+readinessProbe:
+  initialDelaySeconds: 60
+  failureThreshold: 3
+  timeoutSeconds: 2
+  periodSeconds: 10
+  tcpSocket:
+    port: 7687
+
+livenessProbe:
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  failureThreshold: 3
+  timeoutSeconds: 2
+  tcpSocket:
+    port: 7687
+
+securityContext: {}
+# Following values for securityContext are possible/recommended, but depend on
+# volume and filesystem settings local to you
+#  runAsNonRoot: true
+#  runAsUser: 7474
