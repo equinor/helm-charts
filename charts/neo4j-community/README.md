@@ -122,19 +122,13 @@ helm upgrade --install neo4j-community -f values.yaml equinor-charts/neo4j-commu
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
 
-## Warning: Updating password
+## Updating password
 
-I have not found a way of reliably changing the password set with `neo4jPassword` on an existing helm deployment.
-
-The first time the datastore (PV) is used the password is written to disk. Updating the password and running `helm upgrade` will not change it. Changing in the `Secret` will not change it. Using `neo4j-admin set-initial-password` may or may not update the password in the right place.
-
-Your best bet is to remove the helm release, the PV and PVC and start over:
-
-```
-helm delete neo4j-helm
-kubectl delete pv <pvname> &
-kubectl delete pvc datadir-neo4j-helm-neo4j-community-0
-```
+We can indeed reset that password without having to delete the PVC by:
+1. Deleting the file `/var/lib/neo4j/data/dbms/auth`
+1. Running `neo4j-admin set-initial-password <new password>`
+1. Changing the password in the configured `secret`.
+1. Deleting the pod to restart and pick up the latest configuration
 
 ## Special considerations when using AzureFile storage
 
