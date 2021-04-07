@@ -7,4 +7,4 @@ We need to see this line in our pod log:
 
 We can see the content of the logs by running the following command:
 
-kubectl logs -l "app={{ template "neo4j.name" . }}"
+kubectl logs -l "app.kubernetes.io/name=={{ template "neo4j.name" . }}"

@@ -23,7 +23,6 @@ spec:
         app.kubernetes.io/instance: {{ .Release.Name | quote }}
         helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
         app.kubernetes.io/name: {{ template "neo4j.name" . }}
-        app.kubernetes.io/component: core
         {{-  range $key, $value := .Values.podLabels }}
         {{ $key }}: "{{ $value }}"
         {{- end }}

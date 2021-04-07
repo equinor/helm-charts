@@ -9,7 +9,6 @@ metadata:
     app.kubernetes.io/instance: {{ .Release.Name | quote }}
     helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app.kubernetes.io/name: {{ template "neo4j.name" . }}
-    app.kubernetes.io/component: core
 {{- with .Values.service.labels }}
     {{ toYaml . | nindent 4 }}
 {{- end }}
