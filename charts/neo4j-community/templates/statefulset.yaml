@@ -83,7 +83,7 @@ spec:
           {{- end }}
         {{- range .Values.extraVars }}
           - name: {{ .name }}
-            value: {{ .value }}
+            value: {{ .value | quote }}
         {{- end }}
           - name: dbms_jvm_additional
             value: -Dcom.sun.management.jmxremote=true
