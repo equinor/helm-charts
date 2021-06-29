@@ -81,6 +81,10 @@ spec:
                 {{- end}}
                 key: {{ template "neo4j.secrets.key" . }}
           {{- end }}
+        {{- range .Values.extraVars }}
+          - name: {{ .name }}
+            value: {{ .value | quote }}
+        {{- end }}
           - name: dbms_jvm_additional
             value: -Dcom.sun.management.jmxremote=true
               -Dcom.sun.management.jmxremote.authenticate=false
