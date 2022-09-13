@@ -103,9 +103,10 @@ their default values.
 | `livenessProbe.timeoutSeconds`       | Number of seconds after which the probe times out                                                                                       | `2`                                             |
 | `livenessProbe.periodSeconds`        | How often (in seconds) to perform the probe                                                                                             | `10`                                            |
 | `livenessProbe.tcpSocket.port`       | TCP check against the pod's IP address on a specified port                                                                              | `7687`                                          |
-| `securityContext`                    | Security context to be added to pods                                                                                                    | `{}`                                            |
-| `env.JMXPORT`                         | Port for jmxremote rmi port                                                                                                             | 1099 |
-| `exporters.jmx`                       | Configuration for jmx exporter for Prometheus (disabled by default)                                                                                           |  see values.yaml |
+| `securityContext`                    | Security context for neo4j-community pod                                                                                                | `{}`                                            |
+| `env.JMXPORT`                        | Port for jmxremote rmi port                                                                                                             | 1099 |
+| `exporters.jmx`                      | Configuration for jmx exporter for Prometheus (disabled by default)                                                                     |  see values.yaml |
+| `exporters.jmx.securityContext`      | Security context for JMX pod                                                                                                            | `{}`                                            |
 
 The above parameters map to the env variables defined in the
 [Neo4j docker image](https://github.com/neo4j/docker-neo4j).
