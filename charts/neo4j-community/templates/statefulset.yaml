@@ -36,6 +36,8 @@ spec:
       containers:
 {{- if .Values.exporters.jmx.enabled }}
       - name: jmx-exporter
+        securityContext:
+{{ toYaml .Values.exporters.jmx.securityContext | indent 10 }}
         image: "{{ .Values.exporters.jmx.image.repository }}:{{ .Values.exporters.jmx.image.tag }}"
         imagePullPolicy: {{ .Values.exporters.jmx.image.pullPolicy }}
         args: ["{{ .Values.exporters.jmx.ports.jmxxp.containerPort}}", "/opt/jmx_exporter/config.yml"]
@@ -65,6 +67,8 @@ spec:
             subPath: config.yml
 {{- end }}
       - name: {{ template "neo4j.fullname" . }}
+        securityContext:
+{{ toYaml .Values.securityContext | indent 10 }}
         image: "{{ .Values.image }}:{{ .Values.imageTag | default .Chart.AppVersion }}"
         imagePullPolicy: "{{ .Values.imagePullPolicy }}"
         env:
@@ -138,8 +142,6 @@ spec:
       initContainers:
 {{ toYaml .Values.initContainers | indent 6 }}
 {{- end }}
-      securityContext:
-{{ toYaml .Values.securityContext | indent 8 }}
       volumes:
         {{- if not .Values.persistentVolume.enabled }}
         - name: datadir
